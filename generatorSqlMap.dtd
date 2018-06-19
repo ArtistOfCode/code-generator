@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+        <!ELEMENT config (settings,jdbcConnection,javaModelGenerator,mapperGenerator,javaInterfaceGenerator,table+)>
+        <!ELEMENT settings (setting+)>
+        <!ELEMENT setting (#PCDATA)>
+        <!ELEMENT jdbcConnection (#PCDATA)>
+        <!ELEMENT javaModelGenerator (#PCDATA)>
+        <!ELEMENT mapperGenerator (#PCDATA)>
+        <!ELEMENT javaInterfaceGenerator (#PCDATA)>
+        <!ELEMENT table (#PCDATA)>
+
+        <!ATTLIST setting name CDATA #REQUIRED>
+        <!ATTLIST setting value CDATA #REQUIRED>
+
+        <!ATTLIST jdbcConnection driver CDATA #REQUIRED>
+        <!ATTLIST jdbcConnection url CDATA #REQUIRED>
+        <!ATTLIST jdbcConnection username CDATA #REQUIRED>
+        <!ATTLIST jdbcConnection password CDATA #REQUIRED>
+
+        <!ATTLIST javaModelGenerator targetPackage CDATA #REQUIRED>
+        <!ATTLIST javaModelGenerator targetProject CDATA #REQUIRED>
+
+        <!ATTLIST mapperGenerator targetPackage CDATA #REQUIRED>
+        <!ATTLIST mapperGenerator targetProject CDATA #REQUIRED>
+
+        <!ATTLIST javaInterfaceGenerator targetPackage CDATA #REQUIRED>
+        <!ATTLIST javaInterfaceGenerator targetProject CDATA #REQUIRED>
+
+        <!ATTLIST table className CDATA #REQUIRED>
+        <!ATTLIST table tableName CDATA #REQUIRED>
