@@ -4,6 +4,9 @@ import com.codeartist.mybatis.generator.config.*;
 import com.codeartist.mybatis.generator.parsing.XNode;
 import com.codeartist.mybatis.generator.parsing.XPathParser;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,14 @@ public class XMLConfigBuilder {
 
     private Configuration configuration;
     private final XPathParser parser;
+
+    public XMLConfigBuilder(String path) throws FileNotFoundException {
+        this(new File(path));
+    }
+
+    public XMLConfigBuilder(File file) throws FileNotFoundException {
+        this(new FileInputStream(file));
+    }
 
     public XMLConfigBuilder(InputStream inputStream) {
         this.parser = new XPathParser(inputStream);

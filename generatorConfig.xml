@@ -7,9 +7,9 @@
     </settings>
     <dataSource
             driver="com.mysql.jdbc.Driver"
-            url="jdbc:mysql://localhost:3306/example"
-            username="root"
-            password="root"
+            url="jdbc:mysql://192.168.4.194:3306/credit_manager_test"
+            username="credit"
+            password="kdVeeT7glPJu"
     />
     <javaModelGenerator
             targetPackage="com.gofun.credit.core.riskchannel.model.tencent"
