@@ -3,12 +3,9 @@
 
 <config>
     <settings>
-        <setting name="" value=""/>
-        <setting name="" value=""/>
-        <setting name="" value=""/>
-        <setting name="" value=""/>
+        <setting name="enableSerializable" value="true"/>
     </settings>
-    <jdbcConnection
+    <dataSource
             driver="com.mysql.jdbc.Driver"
             url="jdbc:mysql://localhost:3306/example"
             username="root"
@@ -22,9 +19,9 @@
             targetPackage="com.gofun.credit.core.riskchannel.dao.tencent"
             targetProject="./src"
     />
-    <javaInterfaceGenerator
+    <javaDaoGenerator
             targetPackage="com.gofun.credit.core.riskchannel.dao.tencent"
             targetProject="./src"
     />
-    <table className="" tableName="user"/>
+    <table className="User" tableName="user"/>
 </config>
