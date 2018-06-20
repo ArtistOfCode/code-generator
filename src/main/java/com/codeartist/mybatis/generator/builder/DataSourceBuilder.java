@@ -35,6 +35,7 @@ public class DataSourceBuilder {
         if (connection != null) {
             for (Table table : tables) {
                 DataTable dataTable = build(connection, table.getTableName());
+                dataTables.add(dataTable);
             }
             close(connection, null, null);
         }
@@ -121,7 +122,7 @@ public class DataSourceBuilder {
     private Connection open() {
         try {
             Class.forName(dataSource.getDriver());
-            return DriverManager.getConnection(dataSource.getUrl(), dataSource.getUsername(), dataSource.getPassword());
+            return DriverManager.getConnection(dataSource.getUrl() + "?characterEncoding=utf8&useSSL=false", dataSource.getUsername(), dataSource.getPassword());
         } catch (ClassNotFoundException e) {
             logger.error("JDBC driver is not found, cause by " + e.getMessage());
         } catch (SQLException e) {

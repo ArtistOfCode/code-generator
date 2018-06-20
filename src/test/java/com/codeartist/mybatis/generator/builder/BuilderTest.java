@@ -35,6 +35,9 @@ public class BuilderTest {
             String path = "generatorConfig.xml";
             Configuration config = new XMLConfigBuilder(path).parse();
             List<DataTable> dataTables = new DataSourceBuilder(config).build();
+            for (DataTable dataTable : dataTables) {
+                logger.info("dataTable: " + dataTable.getComment());
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
