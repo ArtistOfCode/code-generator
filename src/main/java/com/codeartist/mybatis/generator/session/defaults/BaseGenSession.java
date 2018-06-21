@@ -27,11 +27,11 @@ public class BaseGenSession implements GenSession {
 
     @Override
     public void generateDao() {
-
+        executor.generateDao();
     }
 
     @Override
     public void generateMapper() {
-
+        executor.generateMapper();
     }
 }
