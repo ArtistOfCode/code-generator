@@ -1,13 +1,13 @@
-package com.codeartist;
+package ${packageName};
 
 import java.io.Serializable;
 
 /**
- * calss
+ * ${classComment}
  *
  * @author 艾江南
  */
-public class model implements Serializable {
+public class ${className} implements Serializable {
 
     /**
      * name

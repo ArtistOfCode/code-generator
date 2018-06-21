@@ -12,16 +12,17 @@
             password="root"
     />
     <javaModelGenerator
-            targetPackage="com.gofun.credit.core.riskchannel.model.tencent"
-            targetProject="./src"
+            targetPackage="com.codeartist.mybatis.disc"
+            targetProject="./src/main/java"
     />
     <mapperGenerator
-            targetPackage="com.gofun.credit.core.riskchannel.dao.tencent"
-            targetProject="./src"
+            targetPackage="com.codeartist.mybatis.disc"
+            targetProject="./src/main/java"
     />
     <javaDaoGenerator
-            targetPackage="com.gofun.credit.core.riskchannel.dao.tencent"
-            targetProject="./src"
+            targetPackage="com.codeartist.mybatis.disc"
+            targetProject="./src/main/java"
     />
     <table className="Admin" tableName="admin"/>
+    <table className="" tableName="role"/>
 </config>

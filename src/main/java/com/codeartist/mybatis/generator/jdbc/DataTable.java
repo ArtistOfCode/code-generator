@@ -1,5 +1,7 @@
 package com.codeartist.mybatis.generator.jdbc;
 
+import com.codeartist.mybatis.generator.config.Table;
+
 import java.util.List;
 
 /**
@@ -9,19 +11,19 @@ import java.util.List;
  */
 public class DataTable {
 
-    private String table;
+    private Table table;
     private String comment;
     private List<DataTableColumn> columns;
 
-    public DataTable(String table) {
+    public DataTable(Table table) {
         this.table = table;
     }
 
-    public String getTable() {
+    public Table getTable() {
         return table;
     }
 
-    public void setTable(String table) {
+    public void setTable(Table table) {
         this.table = table;
     }
 
