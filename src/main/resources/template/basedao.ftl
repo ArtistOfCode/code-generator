@@ -10,7 +10,7 @@ public interface BaseMapper<T> {
 
     T selectById(Object id);
 
-    int delectById(Object id);
+    int deleteById(Object id);
 
     int updateById(T entity);
 
