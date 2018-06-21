@@ -8,6 +8,7 @@ package com.codeartist.mybatis.generator.parsing;
 public enum Template {
 
     DAO("dao"),
+    BASEDAO("basedao"),
     MAPPER("mapper"),
     MODEL("model");
 

@@ -3,6 +3,7 @@ package com.codeartist.mybatis.generator.executor;
 import com.codeartist.mybatis.generator.builder.DataSourceBuilder;
 import com.codeartist.mybatis.generator.builder.FileBuilder;
 import com.codeartist.mybatis.generator.config.Configuration;
+import com.codeartist.mybatis.generator.freemarker.DaoData;
 import com.codeartist.mybatis.generator.freemarker.ModelData;
 import com.codeartist.mybatis.generator.handler.ClassHandler;
 import com.codeartist.mybatis.generator.handler.FieldHandler;
@@ -16,21 +17,23 @@ import java.util.List;
 
 public class BaseExecutor implements Executor {
 
-    private final FileBuilder fileBuilder = new FileBuilder();
+    private final FileBuilder fileBuilder;
+    private final ClassHandler classHandler;
     private final Configuration configuration;
     private final List<DataTable> dataTables;
 
     public BaseExecutor(Configuration configuration) {
+        this.fileBuilder = new FileBuilder();
+        this.classHandler = new BaseClassHandler();
         this.configuration = configuration;
         this.dataTables = new DataSourceBuilder(configuration).build();
     }
 
     @Override
     public void generateModel() {
-        ClassHandler classHandler = new BaseClassHandler();
         FieldHandler fieldHandler = new BaseFieldHandler();
         ModelData modelData = new ModelData();
-        String tPackage = configuration.getMapperTarget().getTargetPackage();
+        String tPackage = configuration.getModelTarget().getTargetPackage();
         String path = configuration.getModelTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
         classHandler.packageHandler(path);
         modelData.setPackageName(tPackage);
@@ -47,7 +50,12 @@ public class BaseExecutor implements Executor {
 
     @Override
     public void generateDao() {
-        // TODO: 2018/6/21 generateDao
+        String tPackage = configuration.getDaoTarget().getTargetPackage();
+        String path = configuration.getDaoTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
+        DaoData daoData = new DaoData();
+        daoData.setPackageName(tPackage);
+        classHandler.packageHandler(path);
+        fileBuilder.build(Template.BASEDAO, path + "/BaseDao.java", daoData);
     }
 
     @Override

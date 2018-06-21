@@ -12,15 +12,15 @@
             password="root"
     />
     <javaModelGenerator
-            targetPackage="com.codeartist.mybatis.disc"
+            targetPackage="com.codeartist.mybatis.disc.model"
             targetProject="./src/main/java"
     />
     <mapperGenerator
-            targetPackage="com.codeartist.mybatis.disc"
+            targetPackage="com.codeartist.mybatis.disc.mapper"
             targetProject="./src/main/java"
     />
     <javaDaoGenerator
-            targetPackage="com.codeartist.mybatis.disc"
+            targetPackage="com.codeartist.mybatis.disc.dao"
             targetProject="./src/main/java"
     />
     <table className="Admin" tableName="admin"/>

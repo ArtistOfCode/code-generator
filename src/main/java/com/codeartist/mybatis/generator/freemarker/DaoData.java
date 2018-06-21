@@ -6,4 +6,14 @@ package com.codeartist.mybatis.generator.freemarker;
  * @author 艾江南
  */
 public class DaoData {
+
+    private String packageName;
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
 }
