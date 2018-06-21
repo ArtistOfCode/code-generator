@@ -8,6 +8,8 @@ package com.codeartist.mybatis.generator.freemarker;
 public class DaoData {
 
     private String packageName;
+    private String modelPackage;
+    private String modelName;
 
     public String getPackageName() {
         return packageName;
@@ -15,5 +17,21 @@ public class DaoData {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
+    }
+
+    public String getModelPackage() {
+        return modelPackage;
+    }
+
+    public void setModelPackage(String modelPackage) {
+        this.modelPackage = modelPackage;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 }
