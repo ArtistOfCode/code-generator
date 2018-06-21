@@ -1,5 +1,6 @@
 package com.codeartist.mybatis.generator.freemarker;
 
+import com.codeartist.mybatis.generator.jdbc.DataTableColumn;
 import com.codeartist.mybatis.generator.utils.NameUtil;
 
 /**
@@ -11,12 +12,14 @@ public class Field {
 
     private String column;
     private String dataType;
+    private String comment;
     private String humpName;
     private String bigHumpName;
 
-    public Field(String column, String dataType) {
-        this.column = column;
-        this.dataType = dataType;
+    public Field(DataTableColumn dataTableColumn) {
+        this.column = dataTableColumn.getColumn();
+        this.dataType = dataTableColumn.getClazz();
+        this.comment = dataTableColumn.getComment();
         this.humpName = NameUtil.humpName(column);
         this.bigHumpName = NameUtil.bigHumpName(column);
     }
@@ -35,6 +38,14 @@ public class Field {
 
     public void setDataType(String dataType) {
         this.dataType = dataType;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getHumpName() {

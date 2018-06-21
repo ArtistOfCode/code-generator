@@ -14,6 +14,13 @@ public class BaseGenSession implements GenSession {
     }
 
     @Override
+    public void generate() {
+        generateModel();
+        generateDao();
+        generateMapper();
+    }
+
+    @Override
     public void generateModel() {
         executor.generateModel();
     }

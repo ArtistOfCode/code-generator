@@ -48,7 +48,7 @@ public class ModelData {
     public void setFields(List<DataTableColumn> columns) {
         List<Field> fields = new ArrayList<>();
         for (DataTableColumn dataTableColumn : columns) {
-            fields.add(new Field(dataTableColumn.getColumn(), dataTableColumn.getClazz()));
+            fields.add(new Field(dataTableColumn));
         }
         this.fields = fields;
     }
