@@ -7,4 +7,6 @@ public interface ClassHandler extends IHandler {
 
     void settingsHandler(ModelData modelData, Settings settings);
 
+    void packageHandler(String path);
+
 }

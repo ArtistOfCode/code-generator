@@ -1,8 +1,9 @@
 package ${packageName};
 
-<#if haveSerializable>import java.io.Serializable;</#if>
-<#if haveBigDecimalField>import java.math.BigDecimal;</#if>
-<#if haveDataField>import java.util.Date;</#if>
+<#if haveSerializable>import java.io.Serializable;
+</#if><#if haveBigDecimalField>import java.math.BigDecimal;
+</#if><#if haveDateField>import java.util.Date;
+</#if>
 
 /**
  * ${classComment}

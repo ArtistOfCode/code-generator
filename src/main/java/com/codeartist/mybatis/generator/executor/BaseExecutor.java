@@ -27,18 +27,20 @@ public class BaseExecutor implements Executor {
 
     @Override
     public void generateModel() {
-
-        String tProject = configuration.getModelTarget().getTargetProject();
+        ClassHandler classHandler = new BaseClassHandler();
+        FieldHandler fieldHandler = new BaseFieldHandler();
+        ModelData modelData = new ModelData();
         String tPackage = configuration.getMapperTarget().getTargetPackage();
-        String path = tProject + NameUtil.packageToDir(tPackage);
+        String path = configuration.getModelTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
+        classHandler.packageHandler(path);
+        modelData.setPackageName(tPackage);
+        classHandler.settingsHandler(modelData, configuration.getSettings());
         for (DataTable dataTable : dataTables) {
-            ModelData modelData = new ModelData();
-            modelData.setPackageName(tPackage);
             String table = dataTable.getTable().getClassName();
             modelData.setClassName(table == null || "".equals(table.trim()) ? NameUtil.bigHumpName(dataTable.getTable().getTableName()) : table);
             modelData.setClassComment(dataTable.getComment());
             modelData.setFields(dataTable.getColumns());
-            generateHandler(modelData);
+            fieldHandler.importPackageHandler(modelData);
             fileBuilder.build(Template.MODEL, path + "/" + modelData.getClassName() + ".java", modelData);
         }
     }
@@ -53,10 +55,4 @@ public class BaseExecutor implements Executor {
         // TODO: 2018/6/21 generateMapper
     }
 
-    private void generateHandler(ModelData modelData) {
-        FieldHandler fieldHandler = new BaseFieldHandler();
-        ClassHandler classHandler = new BaseClassHandler();
-        fieldHandler.importPackageHandler(modelData);
-        classHandler.settingsHandler(modelData, configuration.getSettings());
-    }
 }

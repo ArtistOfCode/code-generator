@@ -8,9 +8,11 @@ public class BaseFieldHandler implements FieldHandler {
 
     @Override
     public void importPackageHandler(ModelData modelData) {
+        modelData.setHaveDateField(false);
+        modelData.setHaveBigDecimalField(false);
         for (Field field : modelData.getFields()) {
             if (field.getDataType().equals("Date")) {
-                modelData.setHaveDataField(true);
+                modelData.setHaveDateField(true);
             }
             if (field.getDataType().equals("BigDecimal")) {
                 modelData.setHaveBigDecimalField(true);

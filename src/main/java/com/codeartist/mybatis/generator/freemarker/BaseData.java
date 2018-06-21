@@ -8,7 +8,7 @@ package com.codeartist.mybatis.generator.freemarker;
 public class BaseData {
 
     private boolean haveSerializable = true;
-    private boolean haveDataField;
+    private boolean haveDateField;
     private boolean haveBigDecimalField;
 
     public boolean isHaveSerializable() {
@@ -19,12 +19,12 @@ public class BaseData {
         this.haveSerializable = haveSerializable;
     }
 
-    public boolean isHaveDataField() {
-        return haveDataField;
+    public boolean isHaveDateField() {
+        return haveDateField;
     }
 
-    public void setHaveDataField(boolean haveDataField) {
-        this.haveDataField = haveDataField;
+    public void setHaveDateField(boolean haveDateField) {
+        this.haveDateField = haveDateField;
     }
 
     public boolean isHaveBigDecimalField() {
