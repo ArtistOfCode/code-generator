@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author 艾江南
  */
-public class ModelData {
+public class ModelData extends BaseData {
 
     private String packageName;
     private String className;

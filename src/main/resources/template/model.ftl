@@ -1,13 +1,15 @@
 package ${packageName};
 
-import java.io.Serializable;
+<#if haveSerializable>import java.io.Serializable;</#if>
+<#if haveBigDecimalField>import java.math.BigDecimal;</#if>
+<#if haveDataField>import java.util.Date;</#if>
 
 /**
  * ${classComment}
  *
  * @author 艾江南
  */
-public class ${className} implements Serializable {
+public class ${className} <#if haveSerializable>implements Serializable </#if>{
 
 <#list fields as field>
     /**
