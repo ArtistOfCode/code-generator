@@ -33,11 +33,13 @@ public class DataSourceBuilder {
         List<DataTable> dataTables = new ArrayList<>();
         Connection connection = open();
         if (connection != null) {
+            logger.info("Database connect successful");
             for (Table table : tables) {
                 DataTable dataTable = build(connection, table.getTableName());
                 dataTables.add(dataTable);
             }
             close(connection, null, null);
+            logger.info("Database disconnect successful");
         }
         return dataTables;
     }

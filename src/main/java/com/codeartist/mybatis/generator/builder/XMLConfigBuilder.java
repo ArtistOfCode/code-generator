@@ -3,6 +3,7 @@ package com.codeartist.mybatis.generator.builder;
 import com.codeartist.mybatis.generator.config.*;
 import com.codeartist.mybatis.generator.parsing.XNode;
 import com.codeartist.mybatis.generator.parsing.XPathParser;
+import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +20,7 @@ import java.util.Properties;
  */
 public class XMLConfigBuilder {
 
+    private final Logger logger = Logger.getLogger(XMLConfigBuilder.class);
     private Configuration configuration;
     private final XPathParser parser;
 
@@ -37,6 +39,7 @@ public class XMLConfigBuilder {
     public Configuration parse() {
         this.configuration = new Configuration();
         parseConfiguration(parser.evalNode("/config"));
+        logger.info("Load configuration successful");
         return configuration;
     }
 

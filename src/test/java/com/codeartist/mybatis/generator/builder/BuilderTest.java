@@ -2,11 +2,14 @@ package com.codeartist.mybatis.generator.builder;
 
 import com.codeartist.mybatis.generator.config.Configuration;
 import com.codeartist.mybatis.generator.jdbc.DataTable;
+import com.codeartist.mybatis.generator.parsing.Template;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 配置单元测试
@@ -41,5 +44,13 @@ public class BuilderTest {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void generateFile() {
+        FileBuilder builder = new FileBuilder();
+        Map<String, Object> map = new HashMap<>();
+        map.put("namespace", "aijiangnan111");
+        builder.build(Template.MAPPER, "a/b/c/test.xml", map);
     }
 }
