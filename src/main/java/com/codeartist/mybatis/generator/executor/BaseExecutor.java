@@ -5,6 +5,7 @@ import com.codeartist.mybatis.generator.builder.FileBuilder;
 import com.codeartist.mybatis.generator.config.Configuration;
 import com.codeartist.mybatis.generator.config.Table;
 import com.codeartist.mybatis.generator.freemarker.DaoData;
+import com.codeartist.mybatis.generator.freemarker.MapperData;
 import com.codeartist.mybatis.generator.freemarker.ModelData;
 import com.codeartist.mybatis.generator.handler.ClassHandler;
 import com.codeartist.mybatis.generator.handler.FieldHandler;
@@ -69,7 +70,18 @@ public class BaseExecutor implements Executor {
 
     @Override
     public void generateMapper() {
-        // TODO: 2018/6/21 generateMapper
+        String tPackage = configuration.getMapperTarget().getTargetPackage();
+        String path = configuration.getMapperTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
+        MapperData mapperData = new MapperData();
+        classHandler.packageHandler(path);
+        for (DataTable dataTable : dataTables) {
+            String className = dataTable.getTable().getClassName();
+            mapperData.setFields(dataTable.getColumns());
+            mapperData.setTableName(dataTable.getTable().getTableName());
+            mapperData.setDaoPackage(configuration.getDaoTarget().getTargetPackage() + "." + className + "Mapper");
+            mapperData.setModelPackage(configuration.getModelTarget().getTargetPackage() + "." + className);
+            fileBuilder.build(Template.MAPPER, path + "/" + className + "Mapper.xml", mapperData);
+        }
     }
 
 }

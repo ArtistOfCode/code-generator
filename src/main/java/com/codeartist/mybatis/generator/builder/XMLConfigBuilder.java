@@ -48,8 +48,8 @@ public class XMLConfigBuilder {
         settingsElement(properties);
         dataSourceElement(root.evalNode("dataSource"));
         modelTargetElement(root.evalNode("javaModelGenerator"));
-        daoTargetElement(root.evalNode("mapperGenerator"));
-        mapperTargetElement(root.evalNode("javaDaoGenerator"));
+        daoTargetElement(root.evalNode("javaDaoGenerator"));
+        mapperTargetElement(root.evalNode("mapperGenerator"));
         tableElements(root.evalNodes("table"));
     }
 
