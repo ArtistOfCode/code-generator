@@ -1,5 +1,6 @@
 package com.codeartist.mybatis.generator.builder;
 
+import com.codeartist.mybatis.generator.exceptions.BuilderException;
 import com.codeartist.mybatis.generator.parsing.Template;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
@@ -43,7 +44,7 @@ public class FileBuilder {
             logger.info(template.name + " --> " + path + " successful");
             tpl.process(object, out);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            throw new BuilderException("File generate error, causer by " + e, e);
         }
     }
 

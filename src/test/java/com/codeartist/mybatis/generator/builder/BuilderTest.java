@@ -48,9 +48,13 @@ public class BuilderTest {
 
     @Test
     public void generateFile() {
-        FileBuilder builder = new FileBuilder();
-        Map<String, Object> map = new HashMap<>();
-        map.put("namespace", "aijiangnan111");
-        builder.build(Template.MAPPER, "a/b/c/test.xml", map);
+        try {
+            FileBuilder builder = new FileBuilder();
+            Map<String, Object> map = new HashMap<>();
+            map.put("namespace", "aijiangnan111");
+            builder.build(Template.MAPPER, "a/b/c/test.xml", map);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
     }
 }
