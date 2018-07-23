@@ -3,6 +3,7 @@ package com.codeartist.mybatis.generator.builder;
 import com.codeartist.mybatis.generator.exceptions.BuilderException;
 import com.codeartist.mybatis.generator.parsing.Template;
 import freemarker.cache.ClassTemplateLoader;
+import freemarker.cache.MruCacheStorage;
 import freemarker.template.Configuration;
 import org.apache.log4j.Logger;
 
@@ -24,6 +25,7 @@ public class FileBuilder {
     public FileBuilder() {
         this.configuration = new Configuration(Configuration.VERSION_2_3_23);
         this.configuration.setTemplateLoader(new ClassTemplateLoader(FileBuilder.class, "/template"));
+        this.configuration.setCacheStorage(new MruCacheStorage(10, 100));
         this.configuration.setDefaultEncoding("UTF-8");
     }
 

@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.String.format;
+
 /**
  * 数据库连接构造器
  *
@@ -58,7 +60,7 @@ public class DataSourceBuilder {
 
     private void buildColumnBaseInfo(Connection connection, DataTable dataTable) {
         List<DataTableColumn> dataTableColumns = new ArrayList<>();
-        String sql = String.format("SELECT * FROM %s WHERE 1=0", dataTable.getTable().getTableName());
+        String sql = format("SELECT * FROM %s WHERE 1=0", dataTable.getTable().getTableName());
         PreparedStatement stat = null;
         ResultSet rs = null;
         try {
@@ -82,7 +84,7 @@ public class DataSourceBuilder {
     }
 
     private void buildColumnOtherInfo(Connection connection, DataTable dataTable) {
-        String sql = String.format("SHOW FULL FIELDS FROM %s", dataTable.getTable().getTableName());
+        String sql = format("SHOW FULL FIELDS FROM %s", dataTable.getTable().getTableName());
         Map<String, String> result = new HashMap<>();
         PreparedStatement stat = null;
         ResultSet rs = null;
@@ -105,7 +107,7 @@ public class DataSourceBuilder {
     private void buildTableInfo(Connection connection, DataTable dataTable) {
         String url = dataSource.getUrl();
         String schema = url.substring(url.lastIndexOf("/") + 1);
-        String sql = String.format("SELECT TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA='%s' AND TABLE_NAME='%s'", schema, dataTable.getTable().getTableName());
+        String sql = format("SELECT TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA='%s' AND TABLE_NAME='%s'", schema, dataTable.getTable().getTableName());
         PreparedStatement stat = null;
         ResultSet rs = null;
         try {

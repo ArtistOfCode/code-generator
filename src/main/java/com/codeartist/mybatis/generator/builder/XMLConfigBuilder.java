@@ -21,7 +21,7 @@ import java.util.Properties;
 public class XMLConfigBuilder {
 
     private final Logger logger = Logger.getLogger(XMLConfigBuilder.class);
-    private Configuration configuration;
+    private final Configuration configuration = new Configuration();
     private final XPathParser parser;
 
     public XMLConfigBuilder(String path) throws FileNotFoundException {
@@ -37,23 +37,20 @@ public class XMLConfigBuilder {
     }
 
     public Configuration parse() {
-        this.configuration = new Configuration();
         parseConfiguration(parser.evalNode("/config"));
         logger.info("Load configuration successful");
         return configuration;
     }
 
     private void parseConfiguration(XNode root) {
-        Properties properties = settingsAsProperties(root.evalNode("settings"));
-        settingsElement(properties);
-        dataSourceElement(root.evalNode("dataSource"));
-        modelTargetElement(root.evalNode("javaModelGenerator"));
-        daoTargetElement(root.evalNode("javaDaoGenerator"));
-        mapperTargetElement(root.evalNode("mapperGenerator"));
-        tableElements(root.evalNodes("table"));
+        settingsElement(settingsAsProperties(root));
+        dataSourceElement(root);
+        targetElement(root);
+        tableElements(root);
     }
 
-    private Properties settingsAsProperties(XNode node) {
+    private Properties settingsAsProperties(XNode root) {
+        XNode node = root.evalNode("settings");
         if (node == null) {
             return new Properties();
         }
@@ -68,7 +65,8 @@ public class XMLConfigBuilder {
         configuration.setSettings(settings);
     }
 
-    private void dataSourceElement(XNode node) {
+    private void dataSourceElement(XNode root) {
+        XNode node = root.evalNode("dataSource");
         DataSource dataSource = new DataSource();
         dataSource.setDriver(node.getStringAttribute("driver"));
         dataSource.setUrl(node.getStringAttribute("url"));
@@ -77,19 +75,17 @@ public class XMLConfigBuilder {
         configuration.setDataSource(dataSource);
     }
 
-    private void modelTargetElement(XNode node) {
-        configuration.setModelTarget(genTargetAttr(node));
+    private void targetElement(XNode root) {
+        GenTarget modelGenerator = genTargetAttr(root.evalNode("javaModelGenerator"));
+        GenTarget daoGenerator = genTargetAttr(root.evalNode("javaDaoGenerator"));
+        GenTarget mapperGenerator = genTargetAttr(root.evalNode("mapperGenerator"));
+        configuration.setModelTarget(modelGenerator);
+        configuration.setDaoTarget(daoGenerator);
+        configuration.setMapperTarget(mapperGenerator);
     }
 
-    private void daoTargetElement(XNode node) {
-        configuration.setDaoTarget(genTargetAttr(node));
-    }
-
-    private void mapperTargetElement(XNode node) {
-        configuration.setMapperTarget(genTargetAttr(node));
-    }
-
-    private void tableElements(List<XNode> nodes) {
+    private void tableElements(XNode root) {
+        List<XNode> nodes = root.evalNodes("table");
         List<Table> tables = new ArrayList<>();
         for (XNode node : nodes) {
             Table table = new Table();
