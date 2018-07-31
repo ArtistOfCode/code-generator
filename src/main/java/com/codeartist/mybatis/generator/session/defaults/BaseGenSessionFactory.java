@@ -5,6 +5,7 @@ import com.codeartist.mybatis.generator.config.Configuration;
 import com.codeartist.mybatis.generator.session.GenSession;
 import com.codeartist.mybatis.generator.session.GenSessionFactory;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 public class BaseGenSessionFactory implements GenSessionFactory {
@@ -14,6 +15,16 @@ public class BaseGenSessionFactory implements GenSessionFactory {
     public GenSessionFactory build(String path) {
         try {
             this.configuration = new XMLConfigBuilder(path).parse();
+            return this;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public GenSessionFactory build(File file) {
+        try {
+            this.configuration = new XMLConfigBuilder(file).parse();
             return this;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
