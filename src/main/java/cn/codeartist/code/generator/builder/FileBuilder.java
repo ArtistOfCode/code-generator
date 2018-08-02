@@ -30,6 +30,10 @@ public class FileBuilder {
         this.configuration.setDefaultEncoding("UTF-8");
     }
 
+    public void build(Template template, String path, String className, Object object) {
+        this.build(template, path + "/" + className + template.suffix, object);
+    }
+
     public void build(Template template, String path, Object object) {
         try {
             freemarker.template.Template tpl = configuration.getTemplate(template.name + ".ftl");

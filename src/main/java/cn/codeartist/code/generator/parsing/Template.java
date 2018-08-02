@@ -10,23 +10,25 @@ public enum Template {
     /**
      * 数据库接口
      */
-    DAO("dao"),
+    DAO("dao", "Mapper.java"),
     /**
      * 基础数据库接口
      */
-    BASEDAO("basedao"),
+    BASEDAO("basedao", "BaseMapper.java"),
     /**
      * Mapper文件
      */
-    MAPPER("mapper"),
+    MAPPER("mapper", "Mapper.xml"),
     /**
      * 实体类
      */
-    MODEL("model");
+    MODEL("model", ".java");
 
     public String name;
+    public String suffix;
 
-    Template(String tplName) {
+    Template(String tplName, String suffix) {
         this.name = tplName;
+        this.suffix = suffix;
     }
 }

@@ -59,7 +59,7 @@ public class BaseExecutor implements Executor {
             fieldHandler.columnToField(freemarkerData, dataTable);
             freemarkerData.setClassName(table.getClassName());
             fieldHandler.importPackageHandler(freemarkerData);
-            fileBuilder.build(Template.MODEL, path + "/" + freemarkerData.getClassName() + ".java", freemarkerData);
+            fileBuilder.build(Template.MODEL, path, freemarkerData.getClassName(), freemarkerData);
         }
     }
 
@@ -68,12 +68,12 @@ public class BaseExecutor implements Executor {
         String daoPackage = freemarkerData.getDaoPackage();
         String path = configuration.getDaoTarget().getTargetProject() + NameUtil.packageToDir(daoPackage);
         classHandler.packageHandler(path);
-        fileBuilder.build(Template.BASEDAO, path + "/BaseMapper.java", freemarkerData);
+        fileBuilder.build(Template.BASEDAO, path, "", freemarkerData);
         for (DataTable dataTable : dataTables) {
             Table table = dataTable.getTable();
             classHandler.classHandler(table);
             freemarkerData.setClassName(table.getClassName());
-            fileBuilder.build(Template.DAO, path + "/" + freemarkerData.getClassName() + "Mapper.java", freemarkerData);
+            fileBuilder.build(Template.DAO, path, freemarkerData.getClassName(), freemarkerData);
         }
     }
 
@@ -83,11 +83,12 @@ public class BaseExecutor implements Executor {
         String path = configuration.getMapperTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
         classHandler.packageHandler(path);
         for (DataTable dataTable : dataTables) {
-            String className = dataTable.getTable().getClassName();
+            Table table = dataTable.getTable();
             fieldHandler.columnToField(freemarkerData, dataTable);
-            freemarkerData.setClassName(className);
-            freemarkerData.setTableName(dataTable.getTable().getTableName());
-            fileBuilder.build(Template.MAPPER, path + "/" + className + "Mapper.xml", freemarkerData);
+            classHandler.classHandler(table);
+            freemarkerData.setClassName(table.getClassName());
+            freemarkerData.setTableName(table.getTableName());
+            fileBuilder.build(Template.MAPPER, path, freemarkerData.getClassName(), freemarkerData);
         }
     }
 
