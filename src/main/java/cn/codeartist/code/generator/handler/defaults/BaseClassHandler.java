@@ -2,7 +2,7 @@ package cn.codeartist.code.generator.handler.defaults;
 
 import cn.codeartist.code.generator.config.Settings;
 import cn.codeartist.code.generator.config.Table;
-import cn.codeartist.code.generator.freemarker.ModelData;
+import cn.codeartist.code.generator.freemarker.BaseData;
 import cn.codeartist.code.generator.handler.ClassHandler;
 import cn.codeartist.code.generator.utils.NameUtil;
 import org.apache.log4j.Logger;
@@ -19,8 +19,8 @@ public class BaseClassHandler implements ClassHandler {
     private final Logger logger = Logger.getLogger(BaseClassHandler.class);
 
     @Override
-    public void settingsHandler(ModelData modelData, Settings settings) {
-        modelData.setHaveSerializable(settings.isEnableSerializable());
+    public void settingsHandler(BaseData baseData, Settings settings) {
+        baseData.setHaveSerializable(settings.isEnableSerializable());
     }
 
     @Override

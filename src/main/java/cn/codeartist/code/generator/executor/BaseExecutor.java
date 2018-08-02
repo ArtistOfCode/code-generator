@@ -48,7 +48,7 @@ public class BaseExecutor implements Executor {
         for (DataTable dataTable : dataTables) {
             Table table = dataTable.getTable();
             modelData.setClassComment(dataTable.getComment());
-            modelData.setFields(dataTable.getColumns());
+            fieldHandler.columnToField(modelData, dataTable);
             classHandler.classHandler(table);
             modelData.setClassName(table.getClassName());
             fieldHandler.importPackageHandler(modelData);

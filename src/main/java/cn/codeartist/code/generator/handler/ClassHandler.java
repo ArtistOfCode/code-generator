@@ -2,14 +2,35 @@ package cn.codeartist.code.generator.handler;
 
 import cn.codeartist.code.generator.config.Settings;
 import cn.codeartist.code.generator.config.Table;
-import cn.codeartist.code.generator.freemarker.ModelData;
+import cn.codeartist.code.generator.freemarker.BaseData;
 
-public interface ClassHandler extends IHandler {
+/**
+ * 生成类的处理器
+ *
+ * @author 艾江南
+ */
+public interface ClassHandler {
 
-    void settingsHandler(ModelData modelData, Settings settings);
+    /**
+     * 将配置绑定到类中
+     *
+     * @param baseData 基础数据类
+     * @param settings 配置
+     */
+    void settingsHandler(BaseData baseData, Settings settings);
 
+    /**
+     * 生成包的文件夹
+     *
+     * @param path 包路径
+     */
     void packageHandler(String path);
 
+    /**
+     * 获取配置文件中的表与内对应关系
+     *
+     * @param table 配置
+     */
     void classHandler(Table table);
 
 }

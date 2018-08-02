@@ -1,9 +1,28 @@
 package cn.codeartist.code.generator.handler;
 
-import cn.codeartist.code.generator.freemarker.ModelData;
+import cn.codeartist.code.generator.freemarker.BaseData;
+import cn.codeartist.code.generator.jdbc.DataTable;
 
-public interface FieldHandler extends IHandler {
+/**
+ * 对字段的处理器
+ *
+ * @author 艾江南
+ */
+public interface FieldHandler {
 
-    void importPackageHandler(ModelData modelData);
+    /**
+     * 根据数据类型判断是否要导入包
+     *
+     * @param baseData 基础数据
+     */
+    void importPackageHandler(BaseData baseData);
+
+    /**
+     * 数据库表字段名转类成员变量
+     *
+     * @param baseData  基础数据
+     * @param dataTable 数据库表信息
+     */
+    void columnToField(BaseData baseData, DataTable dataTable);
 
 }

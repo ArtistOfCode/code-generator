@@ -1,5 +1,7 @@
 package cn.codeartist.code.generator.freemarker;
 
+import java.util.List;
+
 /**
  * 基础数据
  *
@@ -10,6 +12,7 @@ public class BaseData {
     private boolean haveSerializable = true;
     private boolean haveDateField;
     private boolean haveBigDecimalField;
+    private List<Field> fields;
 
     public boolean isHaveSerializable() {
         return haveSerializable;
@@ -33,5 +36,13 @@ public class BaseData {
 
     public void setHaveBigDecimalField(boolean haveBigDecimalField) {
         this.haveBigDecimalField = haveBigDecimalField;
+    }
+
+    public List<Field> getFields() {
+        return fields;
+    }
+
+    public void setFields(List<Field> fields) {
+        this.fields = fields;
     }
 }
