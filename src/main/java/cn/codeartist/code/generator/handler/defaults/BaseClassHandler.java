@@ -9,6 +9,11 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 
+/**
+ * 生成类的处理器
+ *
+ * @author 艾江南
+ */
 public class BaseClassHandler implements ClassHandler {
 
     private final Logger logger = Logger.getLogger(BaseClassHandler.class);

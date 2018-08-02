@@ -79,9 +79,9 @@ public class XPathParser {
         return xnodes;
     }
 
-    private Object evaluate(String expresstion, Object root, QName returnType) {
+    private Object evaluate(String expression, Object root, QName returnType) {
         try {
-            return xpath.evaluate(expresstion, root, returnType);
+            return xpath.evaluate(expression, root, returnType);
         } catch (Exception e) {
             throw new BuilderException("Error evaluating XPath.  Cause: " + e, e);
         }

@@ -7,6 +7,8 @@ package cn.codeartist.code.generator.utils;
  */
 public class NameUtil {
 
+    private final static String UNDER_LINE = "_";
+
     /**
      * 包名转换为目录名
      *
@@ -26,12 +28,14 @@ public class NameUtil {
      */
     public static String underName(String name) {
         StringBuilder result = new StringBuilder();
-        if (name == null || name.equals(""))
+        if (name == null || "".equals(name)) {
             return "";
+        }
         for (int i = 0, n = name.length(); i < n; i++) {
             String s = name.substring(i, i + 1);
-            if (s.equals(s.toUpperCase()) && !Character.isDigit(s.charAt(0)))
+            if (s.equals(s.toUpperCase()) && !Character.isDigit(s.charAt(0))) {
                 result.append("_");
+            }
             result.append(s.toLowerCase());
         }
         return result.toString();
@@ -46,17 +50,20 @@ public class NameUtil {
      */
     public static String humpName(String name) {
         StringBuilder result = new StringBuilder();
-        if (name == null || name.equals(""))
+        if (name == null || "".equals(name)) {
             return "";
-        if (!name.contains("_"))
+        }
+        if (!name.contains(UNDER_LINE)) {
             return name.substring(0, 1).toLowerCase() + name.substring(1);
-        String camels[] = name.split("_");
+        }
+        String[] camels = name.split(UNDER_LINE);
         for (String camel : camels) {
-            if (camel.isEmpty())
+            if (camel.isEmpty()) {
                 continue;
-            if (result.length() == 0)
+            }
+            if (result.length() == 0) {
                 result.append(camel.toLowerCase());
-            else {
+            } else {
                 result.append(camel.substring(0, 1).toUpperCase());
                 result.append(camel.substring(1).toLowerCase());
             }

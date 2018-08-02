@@ -17,6 +17,11 @@ import cn.codeartist.code.generator.utils.NameUtil;
 
 import java.util.List;
 
+/**
+ * 生成模块执行基础实现
+ *
+ * @author 艾江南
+ */
 public class BaseExecutor implements Executor {
 
     private final FileBuilder fileBuilder;

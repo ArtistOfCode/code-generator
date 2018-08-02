@@ -1,11 +1,14 @@
-package cn.codeartist.code.generator.executor;
+package cn.codeartist.code.generator.session;
 
 /**
- * 生成模块执行
- *
  * @author 艾江南
  */
-public interface Executor {
+public interface GeneratorSession {
+
+    /**
+     * 生成全部
+     */
+    void generate();
 
     /**
      * 生成实体类
@@ -13,7 +16,7 @@ public interface Executor {
     void generateModel();
 
     /**
-     * 生成Dao接口
+     * 生成数据访问层
      */
     void generateDao();
 

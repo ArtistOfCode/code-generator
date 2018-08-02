@@ -85,7 +85,7 @@ public class DataSourceBuilder {
 
     private void buildColumnOtherInfo(Connection connection, DataTable dataTable) {
         String sql = format("SHOW FULL FIELDS FROM %s", dataTable.getTable().getTableName());
-        Map<String, String> result = new HashMap<>();
+        Map<String, String> result = new HashMap<>(16);
         PreparedStatement stat = null;
         ResultSet rs = null;
         try {

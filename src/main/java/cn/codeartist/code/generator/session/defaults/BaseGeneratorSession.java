@@ -3,13 +3,16 @@ package cn.codeartist.code.generator.session.defaults;
 import cn.codeartist.code.generator.config.Configuration;
 import cn.codeartist.code.generator.executor.BaseExecutor;
 import cn.codeartist.code.generator.executor.Executor;
-import cn.codeartist.code.generator.session.GenSession;
+import cn.codeartist.code.generator.session.GeneratorSession;
 
-public class BaseGenSession implements GenSession {
+/**
+ * @author 艾江南
+ */
+public class BaseGeneratorSession implements GeneratorSession {
 
     private final Executor executor;
 
-    public BaseGenSession(Configuration configuration) {
+    public BaseGeneratorSession(Configuration configuration) {
         this.executor = new BaseExecutor(configuration);
     }
 

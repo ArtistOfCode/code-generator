@@ -1,8 +1,8 @@
 package cn.codeartist.code.generator;
 
-import cn.codeartist.code.generator.session.GenSession;
-import cn.codeartist.code.generator.session.GenSessionFactory;
-import cn.codeartist.code.generator.session.defaults.BaseGenSessionFactory;
+import cn.codeartist.code.generator.session.GeneratorSession;
+import cn.codeartist.code.generator.session.GeneratorSessionFactory;
+import cn.codeartist.code.generator.session.defaults.BaseGeneratorSessionFactory;
 
 /**
  * 主方法
@@ -12,8 +12,8 @@ import cn.codeartist.code.generator.session.defaults.BaseGenSessionFactory;
 public class GeneratorApplication {
 
     public static void main(String[] args) {
-        GenSessionFactory factory = new BaseGenSessionFactory().build("generatorConfig.xml");
-        GenSession session = factory.openSession();
+        GeneratorSessionFactory factory = new BaseGeneratorSessionFactory().build("generatorConfig.xml");
+        GeneratorSession session = factory.openSession();
         session.generate();
     }
 

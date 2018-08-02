@@ -18,21 +18,21 @@ import java.util.Properties;
  *
  * @author 艾江南
  */
-public class XMLConfigBuilder {
+public class XmlConfigBuilder {
 
-    private final Logger logger = Logger.getLogger(XMLConfigBuilder.class);
+    private final Logger logger = Logger.getLogger(XmlConfigBuilder.class);
     private final Configuration configuration = new Configuration();
     private final XPathParser parser;
 
-    public XMLConfigBuilder(String path) throws FileNotFoundException {
+    public XmlConfigBuilder(String path) throws FileNotFoundException {
         this(new File(path));
     }
 
-    public XMLConfigBuilder(File file) throws FileNotFoundException {
+    public XmlConfigBuilder(File file) throws FileNotFoundException {
         this(new FileInputStream(file));
     }
 
-    public XMLConfigBuilder(InputStream inputStream) {
+    public XmlConfigBuilder(InputStream inputStream) {
         this.parser = new XPathParser(inputStream);
     }
 

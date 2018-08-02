@@ -11,6 +11,7 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 源代码生成构建器
@@ -33,7 +34,7 @@ public class FileBuilder {
         try {
             freemarker.template.Template tpl = configuration.getTemplate(template.name + ".ftl");
             FileOutputStream fos = new FileOutputStream(path);
-            Writer out = new BufferedWriter(new OutputStreamWriter(fos, "utf-8"), 10240);
+            Writer out = new BufferedWriter(new OutputStreamWriter(fos, StandardCharsets.UTF_8), 10240);
             logger.info(template.name + " --> " + path + " successful");
             tpl.process(object, out);
         } catch (Exception e) {

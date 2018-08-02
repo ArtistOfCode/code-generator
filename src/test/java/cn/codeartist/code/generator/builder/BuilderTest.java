@@ -24,7 +24,7 @@ public class BuilderTest {
     public void loadGeneratorConfigXMLFile() {
         try {
             String path = "generatorConfig.xml";
-            XMLConfigBuilder config = new XMLConfigBuilder(path);
+            XmlConfigBuilder config = new XmlConfigBuilder(path);
             Configuration configuration = config.parse();
             logger.info("generatorConfig: " + configuration);
         } catch (FileNotFoundException e) {
@@ -36,7 +36,7 @@ public class BuilderTest {
     public void connectDatabase() {
         try {
             String path = "generatorConfig.xml";
-            Configuration config = new XMLConfigBuilder(path).parse();
+            Configuration config = new XmlConfigBuilder(path).parse();
             List<DataTable> dataTables = new DataSourceBuilder(config).build();
             for (DataTable dataTable : dataTables) {
                 logger.info("dataTable: " + dataTable.getComment());
