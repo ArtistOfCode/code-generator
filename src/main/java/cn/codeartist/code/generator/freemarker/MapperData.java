@@ -1,21 +1,15 @@
 package cn.codeartist.code.generator.freemarker;
 
-import cn.codeartist.code.generator.jdbc.DataTableColumn;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Mapper模板对应的数据
  *
  * @author 艾江南
  */
-public class MapperData {
+public class MapperData extends BaseData {
 
     private String daoPackage;
     private String modelPackage;
     private String tableName;
-    private List<Field> fields;
 
     public String getDaoPackage() {
         return daoPackage;
@@ -39,17 +33,5 @@ public class MapperData {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
-    }
-
-    public List<Field> getFields() {
-        return fields;
-    }
-
-    public void setFields(List<DataTableColumn> columns) {
-        List<Field> fields = new ArrayList<>();
-        for (DataTableColumn dataTableColumn : columns) {
-            fields.add(new Field(dataTableColumn));
-        }
-        this.fields = fields;
     }
 }

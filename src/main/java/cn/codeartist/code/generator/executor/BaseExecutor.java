@@ -26,19 +26,20 @@ public class BaseExecutor implements Executor {
 
     private final FileBuilder fileBuilder;
     private final ClassHandler classHandler;
+    private final FieldHandler fieldHandler;
     private final Configuration configuration;
     private final List<DataTable> dataTables;
 
     public BaseExecutor(Configuration configuration) {
         this.fileBuilder = new FileBuilder();
         this.classHandler = new BaseClassHandler();
+        this.fieldHandler = new BaseFieldHandler();
         this.configuration = configuration;
         this.dataTables = new DataSourceBuilder(configuration).build();
     }
 
     @Override
     public void generateModel() {
-        FieldHandler fieldHandler = new BaseFieldHandler();
         ModelData modelData = new ModelData();
         String tPackage = configuration.getModelTarget().getTargetPackage();
         String path = configuration.getModelTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
@@ -81,7 +82,7 @@ public class BaseExecutor implements Executor {
         classHandler.packageHandler(path);
         for (DataTable dataTable : dataTables) {
             String className = dataTable.getTable().getClassName();
-            mapperData.setFields(dataTable.getColumns());
+            fieldHandler.columnToField(mapperData, dataTable);
             mapperData.setTableName(dataTable.getTable().getTableName());
             mapperData.setDaoPackage(configuration.getDaoTarget().getTargetPackage() + "." + className + "Mapper");
             mapperData.setModelPackage(configuration.getModelTarget().getTargetPackage() + "." + className);
