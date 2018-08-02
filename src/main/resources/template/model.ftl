@@ -1,4 +1,4 @@
-package ${packageName};
+package ${modelPackage};
 
 <#if haveSerializable>import java.io.Serializable;
 </#if><#if haveBigDecimalField>import java.math.BigDecimal;
@@ -13,9 +13,11 @@ package ${packageName};
 public class ${className} <#if haveSerializable>implements Serializable </#if>{
 
 <#list fields as field>
+    <#if field.comment != "">
     /**
      * ${field.comment}
      */
+    </#if>
     private ${field.dataType} ${field.humpName};
 </#list>
 <#list fields as field>

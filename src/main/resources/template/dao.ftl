@@ -1,7 +1,7 @@
-package ${packageName};
+package ${daoPackage};
 
-import ${modelPackage};
+import ${modelPackage}.${className};
 
-public interface ${modelName}Mapper extends BaseMapper<${modelName}> {
+public interface ${className}Mapper extends BaseMapper<${className}> {
 
 }

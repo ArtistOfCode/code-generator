@@ -4,9 +4,7 @@ import cn.codeartist.code.generator.builder.DataSourceBuilder;
 import cn.codeartist.code.generator.builder.FileBuilder;
 import cn.codeartist.code.generator.config.Configuration;
 import cn.codeartist.code.generator.config.Table;
-import cn.codeartist.code.generator.freemarker.DaoData;
-import cn.codeartist.code.generator.freemarker.MapperData;
-import cn.codeartist.code.generator.freemarker.ModelData;
+import cn.codeartist.code.generator.freemarker.FreemarkerData;
 import cn.codeartist.code.generator.handler.ClassHandler;
 import cn.codeartist.code.generator.handler.FieldHandler;
 import cn.codeartist.code.generator.handler.defaults.BaseClassHandler;
@@ -29,6 +27,7 @@ public class BaseExecutor implements Executor {
     private final FieldHandler fieldHandler;
     private final Configuration configuration;
     private final List<DataTable> dataTables;
+    private final FreemarkerData freemarkerData;
 
     public BaseExecutor(Configuration configuration) {
         this.fileBuilder = new FileBuilder();
@@ -36,57 +35,59 @@ public class BaseExecutor implements Executor {
         this.fieldHandler = new BaseFieldHandler();
         this.configuration = configuration;
         this.dataTables = new DataSourceBuilder(configuration).build();
+        this.freemarkerData = this.initFreemarkerData(configuration);
+    }
+
+    private FreemarkerData initFreemarkerData(Configuration configuration) {
+        FreemarkerData freemarkerData = new FreemarkerData();
+        freemarkerData.setModelPackage(configuration.getModelTarget().getTargetPackage());
+        freemarkerData.setDaoPackage(configuration.getDaoTarget().getTargetPackage());
+        freemarkerData.setMapperPackage(configuration.getMapperTarget().getTargetPackage());
+        return freemarkerData;
     }
 
     @Override
     public void generateModel() {
-        ModelData modelData = new ModelData();
-        String tPackage = configuration.getModelTarget().getTargetPackage();
-        String path = configuration.getModelTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
+        String modelPackage = freemarkerData.getModelPackage();
+        String path = configuration.getModelTarget().getTargetProject() + NameUtil.packageToDir(modelPackage);
         classHandler.packageHandler(path);
-        modelData.setPackageName(tPackage);
-        classHandler.settingsHandler(modelData, configuration.getSettings());
+        classHandler.settingsHandler(freemarkerData, configuration.getSettings());
         for (DataTable dataTable : dataTables) {
             Table table = dataTable.getTable();
-            modelData.setClassComment(dataTable.getComment());
-            fieldHandler.columnToField(modelData, dataTable);
+            freemarkerData.setClassComment(dataTable.getComment());
             classHandler.classHandler(table);
-            modelData.setClassName(table.getClassName());
-            fieldHandler.importPackageHandler(modelData);
-            fileBuilder.build(Template.MODEL, path + "/" + modelData.getClassName() + ".java", modelData);
+            fieldHandler.columnToField(freemarkerData, dataTable);
+            freemarkerData.setClassName(table.getClassName());
+            fieldHandler.importPackageHandler(freemarkerData);
+            fileBuilder.build(Template.MODEL, path + "/" + freemarkerData.getClassName() + ".java", freemarkerData);
         }
     }
 
     @Override
     public void generateDao() {
-        String tPackage = configuration.getDaoTarget().getTargetPackage();
-        String path = configuration.getDaoTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
-        DaoData daoData = new DaoData();
-        daoData.setPackageName(tPackage);
+        String daoPackage = freemarkerData.getDaoPackage();
+        String path = configuration.getDaoTarget().getTargetProject() + NameUtil.packageToDir(daoPackage);
         classHandler.packageHandler(path);
-        fileBuilder.build(Template.BASEDAO, path + "/BaseMapper.java", daoData);
+        fileBuilder.build(Template.BASEDAO, path + "/BaseMapper.java", freemarkerData);
         for (DataTable dataTable : dataTables) {
             Table table = dataTable.getTable();
             classHandler.classHandler(table);
-            daoData.setModelName(table.getClassName());
-            daoData.setModelPackage(configuration.getModelTarget().getTargetPackage() + "." + daoData.getModelName());
-            fileBuilder.build(Template.DAO, path + "/" + daoData.getModelName() + "Mapper.java", daoData);
+            freemarkerData.setClassName(table.getClassName());
+            fileBuilder.build(Template.DAO, path + "/" + freemarkerData.getClassName() + "Mapper.java", freemarkerData);
         }
     }
 
     @Override
     public void generateMapper() {
-        String tPackage = configuration.getMapperTarget().getTargetPackage();
+        String tPackage = freemarkerData.getMapperPackage();
         String path = configuration.getMapperTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
-        MapperData mapperData = new MapperData();
         classHandler.packageHandler(path);
         for (DataTable dataTable : dataTables) {
             String className = dataTable.getTable().getClassName();
-            fieldHandler.columnToField(mapperData, dataTable);
-            mapperData.setTableName(dataTable.getTable().getTableName());
-            mapperData.setDaoPackage(configuration.getDaoTarget().getTargetPackage() + "." + className + "Mapper");
-            mapperData.setModelPackage(configuration.getModelTarget().getTargetPackage() + "." + className);
-            fileBuilder.build(Template.MAPPER, path + "/" + className + "Mapper.xml", mapperData);
+            fieldHandler.columnToField(freemarkerData, dataTable);
+            freemarkerData.setClassName(className);
+            freemarkerData.setTableName(dataTable.getTable().getTableName());
+            fileBuilder.build(Template.MAPPER, path + "/" + className + "Mapper.xml", freemarkerData);
         }
     }
 
