@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-        <!ELEMENT config (settings,dataSource,javaModelGenerator,mapperGenerator,javaDaoGenerator,table+)>
+        <!ELEMENT config (settings,dataSource,javaModelGenerator,mapperGenerator,javaDaoGenerator,interfaceGenerator,serviceGenerator,controllerGenerator,table+)>
         <!ELEMENT settings (setting+)>
         <!ELEMENT setting (#PCDATA)>
         <!ELEMENT dataSource (#PCDATA)>
         <!ELEMENT javaModelGenerator (#PCDATA)>
         <!ELEMENT mapperGenerator (#PCDATA)>
         <!ELEMENT javaDaoGenerator (#PCDATA)>
+        <!ELEMENT interfaceGenerator (#PCDATA)>
+        <!ELEMENT serviceGenerator (#PCDATA)>
+        <!ELEMENT controllerGenerator (#PCDATA)>
         <!ELEMENT table (#PCDATA)>
 
         <!ATTLIST setting name CDATA #REQUIRED>
@@ -25,6 +28,15 @@
 
         <!ATTLIST javaDaoGenerator targetPackage CDATA #REQUIRED>
         <!ATTLIST javaDaoGenerator targetProject CDATA #REQUIRED>
+
+        <!ATTLIST interfaceGenerator targetPackage CDATA #REQUIRED>
+        <!ATTLIST interfaceGenerator targetProject CDATA #REQUIRED>
+
+        <!ATTLIST serviceGenerator targetPackage CDATA #REQUIRED>
+        <!ATTLIST serviceGenerator targetProject CDATA #REQUIRED>
+
+        <!ATTLIST controllerGenerator targetPackage CDATA #REQUIRED>
+        <!ATTLIST controllerGenerator targetProject CDATA #REQUIRED>
 
         <!ATTLIST table className CDATA #REQUIRED>
         <!ATTLIST table tableName CDATA #REQUIRED>

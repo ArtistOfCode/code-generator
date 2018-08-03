@@ -8,7 +8,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import javax.xml.namespace.QName;
@@ -49,17 +48,17 @@ public class XPathParser {
             builder.setEntityResolver(new XmlConfigEntityResolver());
             builder.setErrorHandler(new ErrorHandler() {
                 @Override
-                public void error(SAXParseException exception) throws SAXException {
+                public void error(SAXParseException exception) {
                     throw new ConfigurationException(exception);
                 }
 
                 @Override
-                public void fatalError(SAXParseException exception) throws SAXException {
+                public void fatalError(SAXParseException exception) {
                     throw new ConfigurationException(exception);
                 }
 
                 @Override
-                public void warning(SAXParseException exception) throws SAXException {
+                public void warning(SAXParseException exception) {
                 }
             });
             return builder.parse(inputSource);

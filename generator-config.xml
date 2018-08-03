@@ -20,7 +20,19 @@
             targetProject="./src/main/java"
     />
     <javaDaoGenerator
-            targetPackage="com.codeartist.mybatis.disc.dao"
+            targetPackage="com.codeartist.mybatis.disc.mapper"
+            targetProject="./src/main/java"
+    />
+    <interfaceGenerator
+            targetPackage="com.codeartist.mybatis.disc.mapper"
+            targetProject="./src/main/java"
+    />
+    <serviceGenerator
+            targetPackage="com.codeartist.mybatis.disc.mapper"
+            targetProject="./src/main/java"
+    />
+    <controllerGenerator
+            targetPackage="com.codeartist.mybatis.disc.mapper"
             targetProject="./src/main/java"
     />
     <table className="Admin" tableName="admin"/>
