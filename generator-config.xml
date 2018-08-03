@@ -24,15 +24,15 @@
             targetProject="./src/main/java"
     />
     <interfaceGenerator
-            targetPackage="com.codeartist.mybatis.disc.mapper"
+            targetPackage="com.codeartist.mybatis.disc.service"
             targetProject="./src/main/java"
     />
     <serviceGenerator
-            targetPackage="com.codeartist.mybatis.disc.mapper"
+            targetPackage="com.codeartist.mybatis.disc.service.impl"
             targetProject="./src/main/java"
     />
     <controllerGenerator
-            targetPackage="com.codeartist.mybatis.disc.mapper"
+            targetPackage="com.codeartist.mybatis.disc.controller"
             targetProject="./src/main/java"
     />
     <table className="Admin" tableName="admin"/>

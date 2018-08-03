@@ -25,4 +25,12 @@ public interface FieldHandler {
      */
     void columnToField(BaseData baseData, DataTable dataTable);
 
+    /**
+     * 获取ID的数据类型
+     *
+     * @param dataTable 数据库表
+     * @return ID数据类型
+     */
+    String getIdClassType(DataTable dataTable);
+
 }

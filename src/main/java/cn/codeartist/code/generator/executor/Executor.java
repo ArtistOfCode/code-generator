@@ -22,4 +22,19 @@ public interface Executor {
      */
     void generateMapper();
 
+    /**
+     * 生成接口文件
+     */
+    void generatorInterface();
+
+    /**
+     * 生成接口实现类文件
+     */
+    void generatorService();
+
+    /**
+     * 生成控制层类文件
+     */
+    void generatorController();
+
 }

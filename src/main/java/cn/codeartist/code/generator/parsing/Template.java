@@ -22,7 +22,19 @@ public enum Template {
     /**
      * 实体类
      */
-    MODEL("model", ".java");
+    MODEL("model", ".java"),
+    /**
+     * 接口
+     */
+    INTERFACE("interface", "Provider.java"),
+    /**
+     * 接口实现
+     */
+    SERVICE("service", "Service.java"),
+    /**
+     * 控制层
+     */
+    CONTROLLER("controller", "Controller.java");
 
     public String name;
     public String suffix;

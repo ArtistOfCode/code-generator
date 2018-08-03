@@ -14,6 +14,9 @@ public class Configuration {
     private GenTarget modelTarget;
     private GenTarget daoTarget;
     private GenTarget mapperTarget;
+    private GenTarget interfaceTarget;
+    private GenTarget serviceTarget;
+    private GenTarget controllerTarget;
     private List<Table> tables;
 
     public DataSource getDataSource() {
@@ -48,6 +51,30 @@ public class Configuration {
         this.mapperTarget = mapperTarget;
     }
 
+    public GenTarget getInterfaceTarget() {
+        return interfaceTarget;
+    }
+
+    public void setInterfaceTarget(GenTarget interfaceTarget) {
+        this.interfaceTarget = interfaceTarget;
+    }
+
+    public GenTarget getServiceTarget() {
+        return serviceTarget;
+    }
+
+    public void setServiceTarget(GenTarget serviceTarget) {
+        this.serviceTarget = serviceTarget;
+    }
+
+    public GenTarget getControllerTarget() {
+        return controllerTarget;
+    }
+
+    public void setControllerTarget(GenTarget controllerTarget) {
+        this.controllerTarget = controllerTarget;
+    }
+
     public List<Table> getTables() {
         return tables;
     }
@@ -72,6 +99,9 @@ public class Configuration {
                 ", modelTarget=" + modelTarget +
                 ", daoTarget=" + daoTarget +
                 ", mapperTarget=" + mapperTarget +
+                ", interfaceTarget=" + interfaceTarget +
+                ", serviceTarget=" + serviceTarget +
+                ", controllerTarget=" + controllerTarget +
                 ", tables=" + tables +
                 '}';
     }

@@ -38,4 +38,15 @@ public class BaseFieldHandler implements FieldHandler {
         }
         baseData.setFields(fields);
     }
+
+    @Override
+    public String getIdClassType(DataTable dataTable) {
+        List<DataTableColumn> columns = dataTable.getColumns();
+        for (DataTableColumn column : columns) {
+            if ("id".equals(column.getColumn())) {
+                return column.getClazz();
+            }
+        }
+        return null;
+    }
 }

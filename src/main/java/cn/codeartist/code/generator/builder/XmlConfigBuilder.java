@@ -79,9 +79,15 @@ public class XmlConfigBuilder {
         GenTarget modelGenerator = genTargetAttr(root.evalNode("javaModelGenerator"));
         GenTarget daoGenerator = genTargetAttr(root.evalNode("javaDaoGenerator"));
         GenTarget mapperGenerator = genTargetAttr(root.evalNode("mapperGenerator"));
+        GenTarget interfaceGenerator = genTargetAttr(root.evalNode("interfaceGenerator"));
+        GenTarget serviceGenerator = genTargetAttr(root.evalNode("serviceGenerator"));
+        GenTarget controllerGenerator = genTargetAttr(root.evalNode("controllerGenerator"));
         configuration.setModelTarget(modelGenerator);
         configuration.setDaoTarget(daoGenerator);
         configuration.setMapperTarget(mapperGenerator);
+        configuration.setInterfaceTarget(interfaceGenerator);
+        configuration.setServiceTarget(serviceGenerator);
+        configuration.setControllerTarget(controllerGenerator);
     }
 
     private void tableElements(XNode root) {

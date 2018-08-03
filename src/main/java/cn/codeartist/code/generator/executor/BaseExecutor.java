@@ -43,6 +43,9 @@ public class BaseExecutor implements Executor {
         freemarkerData.setModelPackage(configuration.getModelTarget().getTargetPackage());
         freemarkerData.setDaoPackage(configuration.getDaoTarget().getTargetPackage());
         freemarkerData.setMapperPackage(configuration.getMapperTarget().getTargetPackage());
+        freemarkerData.setInterfacePackage(configuration.getInterfaceTarget().getTargetPackage());
+        freemarkerData.setServicePackage(configuration.getServiceTarget().getTargetPackage());
+        freemarkerData.setControllerPackage(configuration.getControllerTarget().getTargetPackage());
         return freemarkerData;
     }
 
@@ -92,4 +95,36 @@ public class BaseExecutor implements Executor {
         }
     }
 
+    @Override
+    public void generatorInterface() {
+        String tPackage = freemarkerData.getInterfacePackage();
+        String path = configuration.getInterfaceTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
+        classHandler.packageHandler(path);
+        for (DataTable dataTable : dataTables) {
+            Table table = dataTable.getTable();
+            freemarkerData.setClassName(table.getClassName());
+            freemarkerData.setClassHumpName(NameUtil.humpName(table.getClassName()));
+            freemarkerData.setIdClassType(fieldHandler.getIdClassType(dataTable));
+            fileBuilder.build(Template.INTERFACE, path, freemarkerData.getClassName(), freemarkerData);
+        }
+    }
+
+    @Override
+    public void generatorService() {
+        String tPackage = freemarkerData.getServicePackage();
+        String path = configuration.getServiceTarget().getTargetProject() + NameUtil.packageToDir(tPackage);
+        classHandler.packageHandler(path);
+        for (DataTable dataTable : dataTables) {
+            Table table = dataTable.getTable();
+            freemarkerData.setClassName(table.getClassName());
+            freemarkerData.setClassHumpName(NameUtil.humpName(table.getClassName()));
+            freemarkerData.setIdClassType(fieldHandler.getIdClassType(dataTable));
+            fileBuilder.build(Template.SERVICE, path, freemarkerData.getClassName(), freemarkerData);
+        }
+    }
+
+    @Override
+    public void generatorController() {
+
+    }
 }

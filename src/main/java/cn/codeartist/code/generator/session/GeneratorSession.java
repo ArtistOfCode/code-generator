@@ -25,4 +25,19 @@ public interface GeneratorSession {
      */
     void generateMapper();
 
+    /**
+     * 生成Interface文件
+     */
+    void generateInterface();
+
+    /**
+     * 生成Service文件
+     */
+    void generateService();
+
+    /**
+     * 生成Controller文件
+     */
+    void generateController();
+
 }

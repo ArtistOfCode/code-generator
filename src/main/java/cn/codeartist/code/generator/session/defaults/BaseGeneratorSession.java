@@ -21,6 +21,9 @@ public class BaseGeneratorSession implements GeneratorSession {
         this.generateModel();
         this.generateDao();
         this.generateMapper();
+        this.generateInterface();
+        this.generateService();
+        this.generateController();
     }
 
     @Override
@@ -36,5 +39,20 @@ public class BaseGeneratorSession implements GeneratorSession {
     @Override
     public void generateMapper() {
         executor.generateMapper();
+    }
+
+    @Override
+    public void generateInterface() {
+        executor.generatorInterface();
+    }
+
+    @Override
+    public void generateService() {
+        executor.generatorService();
+    }
+
+    @Override
+    public void generateController() {
+        executor.generatorController();
     }
 }

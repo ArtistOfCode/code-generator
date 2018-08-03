@@ -10,6 +10,16 @@
         <#list fields as field>`${field.column}`<#if field.column != field.humpName> AS ${field.humpName}</#if><#if field_has_next>,</#if></#list>
     </sql>
 
+    <sql id="column_where">
+        <where>
+            <#list fields as field>
+            <if test="${field.humpName} != null<#if field.dataType == "String"> and ${field.humpName} != ''</#if>">
+                AND `${field.column}`=${"#{"}${field.humpName}${"}"}
+            </if>
+            </#list>
+        </where>
+    </sql>
+
     <sql id="column_set">
         <set>
             <#list fields as field>
@@ -24,8 +34,9 @@
         INSERT INTO `${tableName}` (<include refid="column_list"/>) VALUES (<#list fields as field>${"#{"}${field.humpName}${"}"}<#if field_has_next>,</#if></#list>);
     </insert>
 
-    <select id="select" resultType="${modelPackage}.${className}">
+    <select id="select" parameterType="${modelPackage}.${className}" resultType="${modelPackage}.${className}">
         SELECT <include refid="column_map"/> FROM `${tableName}`
+            <include refid="column_where"/>
     </select>
 
     <select id="selectById" resultType="${modelPackage}.${className}">
