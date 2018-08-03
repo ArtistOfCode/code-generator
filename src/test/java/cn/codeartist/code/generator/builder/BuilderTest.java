@@ -23,7 +23,7 @@ public class BuilderTest {
     @Test
     public void loadGeneratorConfigXMLFile() {
         try {
-            String path = "generatorConfig.xml";
+            String path = "generator-config.xml";
             XmlConfigBuilder config = new XmlConfigBuilder(path);
             Configuration configuration = config.parse();
             logger.info("generatorConfig: " + configuration);
@@ -35,7 +35,7 @@ public class BuilderTest {
     @Test
     public void connectDatabase() {
         try {
-            String path = "generatorConfig.xml";
+            String path = "generator-config.xml";
             Configuration config = new XmlConfigBuilder(path).parse();
             List<DataTable> dataTables = new DataSourceBuilder(config).build();
             for (DataTable dataTable : dataTables) {

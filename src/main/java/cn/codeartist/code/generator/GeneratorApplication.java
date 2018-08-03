@@ -12,7 +12,7 @@ import cn.codeartist.code.generator.session.defaults.BaseGeneratorSessionFactory
 public class GeneratorApplication {
 
     public static void main(String[] args) {
-        GeneratorSessionFactory factory = new BaseGeneratorSessionFactory().build("generatorConfig.xml");
+        GeneratorSessionFactory factory = new BaseGeneratorSessionFactory().build("generator-config.xml");
         GeneratorSession session = factory.openSession();
         session.generate();
     }

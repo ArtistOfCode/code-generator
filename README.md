@@ -27,7 +27,7 @@
 public class GeneratorApplication {
 
     public static void main(String[] args) {
-        GenSessionFactory factory = new BaseGenSessionFactory().build("generatorConfig.xml");
+        GenSessionFactory factory = new BaseGenSessionFactory().build("generator-config.xml");
         GenSession session = factory.openSession();
         session.generate();
     }

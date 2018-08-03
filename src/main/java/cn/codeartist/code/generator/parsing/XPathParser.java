@@ -1,10 +1,15 @@
 package cn.codeartist.code.generator.parsing;
 
+import cn.codeartist.code.generator.builder.XmlConfigEntityResolver;
 import cn.codeartist.code.generator.exceptions.BuilderException;
+import cn.codeartist.code.generator.exceptions.ConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
@@ -34,12 +39,29 @@ public class XPathParser {
     private Document createDocument(InputSource inputSource) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setValidating(true);
             factory.setNamespaceAware(false);
             factory.setIgnoringComments(true);
             factory.setIgnoringElementContentWhitespace(false);
             factory.setCoalescing(false);
             factory.setExpandEntityReferences(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
+            builder.setEntityResolver(new XmlConfigEntityResolver());
+            builder.setErrorHandler(new ErrorHandler() {
+                @Override
+                public void error(SAXParseException exception) throws SAXException {
+                    throw new ConfigurationException(exception);
+                }
+
+                @Override
+                public void fatalError(SAXParseException exception) throws SAXException {
+                    throw new ConfigurationException(exception);
+                }
+
+                @Override
+                public void warning(SAXParseException exception) throws SAXException {
+                }
+            });
             return builder.parse(inputSource);
         } catch (Exception e) {
             throw new BuilderException("Error creating document instance.  Cause: " + e.getMessage(), e);
