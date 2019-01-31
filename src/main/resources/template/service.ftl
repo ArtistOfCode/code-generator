@@ -2,12 +2,12 @@ package ${servicePackage};
 
 import ${daoPackage}.${className}Mapper;
 import ${modelPackage}.${className};
-import ${interfacePackage}.${className}Provider;
+import ${interfacePackage}.${className}Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-public class ${className}Service implements ${className}Provider {
+public class ${className}ServiceImpl implements ${className}Service {
 
     @Resource
     private ${className}Mapper ${classHumpName}Mapper;

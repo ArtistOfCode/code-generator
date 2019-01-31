@@ -1,7 +1,7 @@
 package cn.codeartist.code.generator.handler.defaults;
 
-import cn.codeartist.code.generator.config.Settings;
-import cn.codeartist.code.generator.config.Table;
+import cn.codeartist.code.generator.config.Configuration.Settings;
+import cn.codeartist.code.generator.config.Configuration.Table;
 import cn.codeartist.code.generator.freemarker.BaseData;
 import cn.codeartist.code.generator.handler.ClassHandler;
 import cn.codeartist.code.generator.utils.NameUtil;
@@ -40,6 +40,6 @@ public class BaseClassHandler implements ClassHandler {
     @Override
     public void classHandler(Table table) {
         String className = table.getClassName();
-        table.setClassName(className == null || "".equals(className.trim()) ? NameUtil.bigHumpName(table.getTableName()) : className);
+        table.setClassName(className == null || className.trim().isEmpty() ? NameUtil.bigHumpName(table.getTableName()) : className);
     }
 }

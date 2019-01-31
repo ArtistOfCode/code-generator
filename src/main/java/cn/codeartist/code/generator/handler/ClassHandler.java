@@ -1,7 +1,7 @@
 package cn.codeartist.code.generator.handler;
 
-import cn.codeartist.code.generator.config.Settings;
-import cn.codeartist.code.generator.config.Table;
+import cn.codeartist.code.generator.config.Configuration.Settings;
+import cn.codeartist.code.generator.config.Configuration.Table;
 import cn.codeartist.code.generator.freemarker.BaseData;
 
 /**

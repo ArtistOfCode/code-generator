@@ -4,6 +4,7 @@
 <config>
     <settings>
         <setting name="enableSerializable" value="true"/>
+        <setting name="enableLombok" value="true"/>
     </settings>
     <dataSource
             driver="com.mysql.jdbc.Driver"

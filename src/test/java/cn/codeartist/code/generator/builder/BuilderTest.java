@@ -27,6 +27,8 @@ public class BuilderTest {
             XmlConfigBuilder config = new XmlConfigBuilder(path);
             Configuration configuration = config.parse();
             logger.info("generatorConfig: " + configuration);
+            logger.info("Settings: " + configuration.getSettings());
+            logger.info("DataSource: " + configuration.getDataSource());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -49,7 +51,7 @@ public class BuilderTest {
     @Test
     public void generateFile() {
         try {
-            FileBuilder builder = new FileBuilder();
+            FileBuilder builder = new FileBuilder(new Configuration());
             Map<String, Object> map = new HashMap<>();
             map.put("namespace", "aijiangnan111");
             builder.build(Template.MAPPER, "a/b/c/test.xml", map);

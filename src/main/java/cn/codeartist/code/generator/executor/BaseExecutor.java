@@ -3,7 +3,7 @@ package cn.codeartist.code.generator.executor;
 import cn.codeartist.code.generator.builder.DataSourceBuilder;
 import cn.codeartist.code.generator.builder.FileBuilder;
 import cn.codeartist.code.generator.config.Configuration;
-import cn.codeartist.code.generator.config.Table;
+import cn.codeartist.code.generator.config.Configuration.Table;
 import cn.codeartist.code.generator.freemarker.FreemarkerData;
 import cn.codeartist.code.generator.handler.ClassHandler;
 import cn.codeartist.code.generator.handler.FieldHandler;
@@ -30,7 +30,7 @@ public class BaseExecutor implements Executor {
     private final FreemarkerData freemarkerData;
 
     public BaseExecutor(Configuration configuration) {
-        this.fileBuilder = new FileBuilder();
+        this.fileBuilder = new FileBuilder(configuration);
         this.classHandler = new BaseClassHandler();
         this.fieldHandler = new BaseFieldHandler();
         this.configuration = configuration;

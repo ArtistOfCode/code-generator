@@ -4,7 +4,7 @@ import ${modelPackage}.${className};
 
 import java.util.List;
 
-public interface ${className}Provider {
+public interface ${className}Service {
 
     int insert${className}(${className} ${classHumpName});
 

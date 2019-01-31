@@ -26,11 +26,11 @@ public enum Template {
     /**
      * 接口
      */
-    INTERFACE("interface", "Provider.java"),
+    INTERFACE("interface", "Service.java"),
     /**
      * 接口实现
      */
-    SERVICE("service", "Service.java"),
+    SERVICE("service", "ServiceImpl.java"),
     /**
      * 控制层
      */

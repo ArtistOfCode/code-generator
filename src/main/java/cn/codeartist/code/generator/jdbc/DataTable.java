@@ -1,6 +1,6 @@
 package cn.codeartist.code.generator.jdbc;
 
-import cn.codeartist.code.generator.config.Table;
+import cn.codeartist.code.generator.config.Configuration.Table;
 
 import java.util.List;
 

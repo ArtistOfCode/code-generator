@@ -1,6 +1,9 @@
 package cn.codeartist.code.generator.builder;
 
-import cn.codeartist.code.generator.config.*;
+import cn.codeartist.code.generator.config.Configuration;
+import cn.codeartist.code.generator.config.Configuration.GenTarget;
+import cn.codeartist.code.generator.config.Configuration.Table;
+import cn.codeartist.code.generator.config.DataSource;
 import cn.codeartist.code.generator.parsing.XNode;
 import cn.codeartist.code.generator.parsing.XPathParser;
 import org.apache.log4j.Logger;
@@ -60,8 +63,10 @@ public class XmlConfigBuilder {
     }
 
     private void settingsElement(Properties properties) {
-        Settings settings = new Settings();
+        Configuration.Settings settings = configuration.new Settings();
         settings.setEnableSerializable(Boolean.valueOf(properties.getProperty("enableSerializable")));
+        settings.setEnableLombok(Boolean.valueOf(properties.getProperty("enableLombok")));
+        settings.setTemplatePath(properties.getProperty("templatePath"));
         configuration.setSettings(settings);
     }
 
@@ -94,7 +99,7 @@ public class XmlConfigBuilder {
         List<XNode> nodes = root.evalNodes("table");
         List<Table> tables = new ArrayList<>();
         for (XNode node : nodes) {
-            Table table = new Table();
+            Table table = configuration.new Table();
             table.setClassName(node.getStringAttribute("className"));
             table.setTableName(node.getStringAttribute("tableName"));
             tables.add(table);
@@ -103,7 +108,7 @@ public class XmlConfigBuilder {
     }
 
     private GenTarget genTargetAttr(XNode node) {
-        GenTarget genTarget = new GenTarget();
+        GenTarget genTarget = configuration.new GenTarget();
         genTarget.setTargetPackage(node.getStringAttribute("targetPackage"));
         genTarget.setTargetProject(node.getStringAttribute("targetProject"));
         return genTarget;

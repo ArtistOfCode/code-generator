@@ -1,5 +1,7 @@
 package cn.codeartist.code.generator.config;
 
+import lombok.Data;
+
 import java.util.List;
 
 /**
@@ -7,6 +9,7 @@ import java.util.List;
  *
  * @author 艾江南
  */
+@Data
 public class Configuration {
 
     private Settings settings;
@@ -19,90 +22,34 @@ public class Configuration {
     private GenTarget controllerTarget;
     private List<Table> tables;
 
-    public DataSource getDataSource() {
-        return dataSource;
+    /**
+     * 配置里面的设置实体
+     */
+    @Data
+    public class Settings {
+        private boolean enableSerializable = true;
+        private boolean enableLombok = true;
+        private String templatePath = "/template";
     }
 
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+    /**
+     * 生成源代码目标文件夹
+     */
+    @Data
+    public class GenTarget {
+        private String targetPackage;
+        private String targetProject;
     }
 
-    public GenTarget getModelTarget() {
-        return modelTarget;
+    /**
+     * 数据库表
+     *
+     * @author 艾江南
+     */
+    @Data
+    public class Table {
+        private String className;
+        private String tableName;
     }
 
-    public void setModelTarget(GenTarget modelTarget) {
-        this.modelTarget = modelTarget;
-    }
-
-    public GenTarget getDaoTarget() {
-        return daoTarget;
-    }
-
-    public void setDaoTarget(GenTarget daoTarget) {
-        this.daoTarget = daoTarget;
-    }
-
-    public GenTarget getMapperTarget() {
-        return mapperTarget;
-    }
-
-    public void setMapperTarget(GenTarget mapperTarget) {
-        this.mapperTarget = mapperTarget;
-    }
-
-    public GenTarget getInterfaceTarget() {
-        return interfaceTarget;
-    }
-
-    public void setInterfaceTarget(GenTarget interfaceTarget) {
-        this.interfaceTarget = interfaceTarget;
-    }
-
-    public GenTarget getServiceTarget() {
-        return serviceTarget;
-    }
-
-    public void setServiceTarget(GenTarget serviceTarget) {
-        this.serviceTarget = serviceTarget;
-    }
-
-    public GenTarget getControllerTarget() {
-        return controllerTarget;
-    }
-
-    public void setControllerTarget(GenTarget controllerTarget) {
-        this.controllerTarget = controllerTarget;
-    }
-
-    public List<Table> getTables() {
-        return tables;
-    }
-
-    public void setTables(List<Table> tables) {
-        this.tables = tables;
-    }
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-    public void setSettings(Settings settings) {
-        this.settings = settings;
-    }
-
-    @Override
-    public String toString() {
-        return "Configuration{" +
-                "settings=" + settings +
-                ", dataSource=" + dataSource +
-                ", modelTarget=" + modelTarget +
-                ", daoTarget=" + daoTarget +
-                ", mapperTarget=" + mapperTarget +
-                ", interfaceTarget=" + interfaceTarget +
-                ", serviceTarget=" + serviceTarget +
-                ", controllerTarget=" + controllerTarget +
-                ", tables=" + tables +
-                '}';
-    }
 }

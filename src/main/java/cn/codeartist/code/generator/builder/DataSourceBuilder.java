@@ -1,8 +1,8 @@
 package cn.codeartist.code.generator.builder;
 
 import cn.codeartist.code.generator.config.Configuration;
+import cn.codeartist.code.generator.config.Configuration.Table;
 import cn.codeartist.code.generator.config.DataSource;
-import cn.codeartist.code.generator.config.Table;
 import cn.codeartist.code.generator.jdbc.DataTable;
 import cn.codeartist.code.generator.jdbc.DataTableColumn;
 import org.apache.log4j.Logger;
