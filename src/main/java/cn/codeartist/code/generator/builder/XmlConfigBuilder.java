@@ -6,6 +6,7 @@ import cn.codeartist.code.generator.config.Configuration.Table;
 import cn.codeartist.code.generator.config.DataSource;
 import cn.codeartist.code.generator.parsing.XNode;
 import cn.codeartist.code.generator.parsing.XPathParser;
+import cn.codeartist.code.generator.utils.FunctionUtil;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -64,19 +65,22 @@ public class XmlConfigBuilder {
 
     private void settingsElement(Properties properties) {
         Configuration.Settings settings = configuration.new Settings();
-        settings.setEnableSerializable(Boolean.valueOf(properties.getProperty("enableSerializable")));
-        settings.setEnableLombok(Boolean.valueOf(properties.getProperty("enableLombok")));
-        settings.setTemplatePath(properties.getProperty("templatePath"));
+        FunctionUtil.requireNonEmpty(properties.getProperty("enableSerializable"),
+                enableSerializable -> settings.setEnableSerializable(Boolean.valueOf(enableSerializable)));
+        FunctionUtil.requireNonEmpty(properties.getProperty("enableLombok"),
+                enableLombok -> settings.setEnableLombok(Boolean.valueOf(enableLombok)));
+        FunctionUtil.requireNonEmpty(properties.getProperty("templatePath"),
+                settings::setTemplatePath);
         configuration.setSettings(settings);
     }
 
     private void dataSourceElement(XNode root) {
         XNode node = root.evalNode("dataSource");
         DataSource dataSource = new DataSource();
-        dataSource.setDriver(node.getStringAttribute("driver"));
-        dataSource.setUrl(node.getStringAttribute("url"));
-        dataSource.setUsername(node.getStringAttribute("username"));
-        dataSource.setPassword(node.getStringAttribute("password"));
+        FunctionUtil.requireNonEmptyThrow(node.getStringAttribute("driver"), dataSource::setDriver, "the driver is required");
+        FunctionUtil.requireNonEmptyThrow(node.getStringAttribute("url"), dataSource::setUrl, "the url is required");
+        FunctionUtil.requireNonEmptyThrow(node.getStringAttribute("username"), dataSource::setUsername, "the username is required");
+        FunctionUtil.requireNonEmptyThrow(node.getStringAttribute("password"), dataSource::setPassword, "the password is required");
         configuration.setDataSource(dataSource);
     }
 
@@ -109,8 +113,8 @@ public class XmlConfigBuilder {
 
     private GenTarget genTargetAttr(XNode node) {
         GenTarget genTarget = configuration.new GenTarget();
-        genTarget.setTargetPackage(node.getStringAttribute("targetPackage"));
-        genTarget.setTargetProject(node.getStringAttribute("targetProject"));
+        FunctionUtil.requireNonEmpty(node.getStringAttribute("targetPackage"), genTarget::setTargetPackage);
+        FunctionUtil.requireNonEmpty(node.getStringAttribute("targetProject"), genTarget::setTargetProject);
         return genTarget;
     }
 }
